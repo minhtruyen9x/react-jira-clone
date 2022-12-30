@@ -30,6 +30,7 @@
         font-size: 2rem;
         font-weight: 500;
         margin-left: 4px;
+        white-space: nowrap;
     }
 }
 
@@ -100,6 +101,10 @@
 }
 
 @media (max-width:576px) {
+    .logo h1 {
+        font-size: 1.6rem;
+    }
+
     .navigation {
         position: fixed;
         bottom: 0;

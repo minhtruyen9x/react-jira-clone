@@ -153,7 +153,6 @@ const UserList = () => {
                 return (
                     <MoreMenu items={actions} placement='bottom-end' onChange={({ action }) => { handleSelect(action, params.row.userId) }}>
                         <MoreHorizOutlinedIcon />
-                        {console.log("table render ne")}
                     </MoreMenu>
                 );
             },

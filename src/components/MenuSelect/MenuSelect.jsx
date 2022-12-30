@@ -103,7 +103,6 @@ const MenuSelect = forwardRef(({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    console.log("render Menu")
     return (
         <div className={cx('tippyWrapper')}>
             {label ? <label htmlFor="">{label}</label> : null}

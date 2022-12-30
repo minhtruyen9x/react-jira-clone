@@ -14,7 +14,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 // import useRequest from '../../../hooks/useRequest'
 import projectAPI from '../../../services/projectAPI'
 import anothersAPI from '../../../services/anothersAPI'
-import { toggleTaskModal, getTaskById, reGetTaskById } from '../../../redux/slices/taskSlice'
+import { toggleTaskModal, reGetTaskById } from '../../../redux/slices/taskSlice'
 
 import { getProjectDetail } from '../../../redux/slices/projectSlice'
 

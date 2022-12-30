@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 
 
 import { JiraLogo } from '../../../components/SVG'
@@ -59,12 +59,12 @@ const Header = () => {
 
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('logo')}>
+            <Link to='/jira' className={cx('logo')}>
                 <JiraLogo width={20} height={20} />
                 <h1>
                     Jira Software
                 </h1>
-            </div>
+            </Link>
             <div className={cx('navigation')}>
                 <ul className={cx('list')}>
                     <li className={cx('item')}>
