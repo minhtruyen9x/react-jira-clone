@@ -12,7 +12,7 @@ import { Avatar } from '@mui/material';
 
 
 import commentAPI from '../../../../services/commentAPI'
-import { getTaskById } from '../../../../redux/slices/taskSlice'
+import { reGetTaskById } from '../../../../redux/slices/taskSlice'
 
 import classNames from 'classnames/bind'
 import styles from './Comment.module.scss'
@@ -48,7 +48,7 @@ const Comment = () => {
             .then(() => {
                 toast.success("Add comment successful")
                 commentRef.current.setValue('')
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 toast.error(typeof error === "string" ? error : "Not have permission")
@@ -64,7 +64,7 @@ const Comment = () => {
             .then(() => {
                 toast.success("Update comment successful")
                 formMethod.handleCloseEdit()
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 toast.error(typeof error === "string" ? error : "Not have permission")
@@ -79,7 +79,7 @@ const Comment = () => {
         commentAPI.deleteComment(item.id)
             .then(() => {
                 toast.success("Delete comment successful")
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 toast.error(typeof error === "string" ? error : "Not have permission")

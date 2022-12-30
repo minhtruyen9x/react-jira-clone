@@ -14,7 +14,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 // import useRequest from '../../../hooks/useRequest'
 import projectAPI from '../../../services/projectAPI'
 import anothersAPI from '../../../services/anothersAPI'
-import { toggleTaskModal, getTaskById } from '../../../redux/slices/taskSlice'
+import { toggleTaskModal, getTaskById, reGetTaskById } from '../../../redux/slices/taskSlice'
 
 import { getProjectDetail } from '../../../redux/slices/projectSlice'
 
@@ -72,7 +72,7 @@ const TaskDetailModal = () => {
         projectAPI.updateTask(data)
             .then(() => {
                 toast.success("Update task successful")
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 inputMethod.setValue(task.taskName)
@@ -89,7 +89,7 @@ const TaskDetailModal = () => {
         projectAPI.updateTask(data)
             .then(() => {
                 toast.success("Update task successful")
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 inputMethod.setValue(task.taskTypeDetail)
@@ -104,7 +104,7 @@ const TaskDetailModal = () => {
         })
             .then(() => {
                 toast.success("Update task successful")
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 toast.error(typeof error === "string" ? error : "Not have permission")
@@ -119,7 +119,7 @@ const TaskDetailModal = () => {
         })
             .then(() => {
                 toast.success("Change status successful")
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 toast.error(typeof error === "string" ? error : "Not have permission")
@@ -135,7 +135,7 @@ const TaskDetailModal = () => {
         })
             .then(() => {
                 toast.success("Change priority successful")
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 toast.error(typeof error === "string" ? error : "Not have permission")
@@ -150,7 +150,7 @@ const TaskDetailModal = () => {
         })
             .then(() => {
                 toast.success("Remove user successful")
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 toast.error(typeof error === "string" ? error : "Not have permission")
@@ -171,7 +171,7 @@ const TaskDetailModal = () => {
         })
             .then(() => {
                 toast.success("Add user successful")
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 toast.error(typeof error === "string" ? error : "Not have permission")
@@ -184,6 +184,8 @@ const TaskDetailModal = () => {
             .then(() => {
                 toast.success("Delte task successful")
                 dispatch(toggleTaskModal(false))
+                dispatch(getProjectDetail(selectedProject.id))
+
             })
             .catch((error) => {
                 toast.error(typeof error === "string" ? error : "Not have permission")
@@ -199,7 +201,7 @@ const TaskDetailModal = () => {
         })
             .then(() => {
                 toast.success("Update task successful")
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 inputMethod.setValue(task?.originalEstimate)
@@ -225,7 +227,7 @@ const TaskDetailModal = () => {
         })
             .then(() => {
                 toast.success("Update task successful")
-                dispatch(getTaskById(task.taskId))
+                dispatch(reGetTaskById(task.taskId))
             })
             .catch((error) => {
                 toast.error(typeof error === "string" ? error : "Not have permission")
@@ -248,7 +250,7 @@ const TaskDetailModal = () => {
             onClose={handleCloseTaskModal}
         >
             <DialogTitle>
-                {loading && !task ?
+                {loading ?
                     null :
                     (<header className={cx('header')}>
                         <div className={cx('headerLeft')}>
@@ -295,7 +297,7 @@ const TaskDetailModal = () => {
                 }
             </DialogTitle>
             <DialogContent>
-                {loading && !task ?
+                {loading ?
                     <SkeletonLoad /> :
                     (<section className={cx('body')}>
                         <div className={cx('left')}>

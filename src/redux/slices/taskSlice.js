@@ -27,6 +27,23 @@ export const getTaskById = createAsyncThunk(
     }
 )
 
+export const reGetTaskById = createAsyncThunk(
+    'task/reGetTaskById',
+    async (taskId) => {
+        try {
+            const data = await projectAPI.getTaskDetail(taskId)
+            data.taskStatusDetail = {
+                id: data.statusId,
+                statusName: statusMap[data.statusId].name
+            }
+
+            return data
+        } catch (error) {
+            throw error
+        }
+    }
+)
+
 const taskSlice = createSlice({
     name: 'task',
     initialState,
@@ -51,7 +68,7 @@ const taskSlice = createSlice({
             return {
                 ...state,
                 loading: false,
-                task: action.payload
+                task: action.payload,
             }
         })
 
@@ -59,6 +76,20 @@ const taskSlice = createSlice({
             return {
                 ...state,
                 loading: false,
+                error: action.error.message
+            }
+        })
+
+        builder.addCase(reGetTaskById.fulfilled, (state, action) => {
+            return {
+                ...state,
+                task: action.payload,
+            }
+        })
+
+        builder.addCase(reGetTaskById.rejected, (state, action) => {
+            return {
+                ...state,
                 error: action.error.message
             }
         })
