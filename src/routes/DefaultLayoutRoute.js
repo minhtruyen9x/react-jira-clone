@@ -8,6 +8,7 @@ import MyProjects from "../pages/MyProjects";
 import UserList from "../pages/UserList";
 import UserDetail from "../pages/UserDetail";
 import ProjectList from "../pages/ProjectList";
+import UnderDevelopment from "../pages/UnderDevelopment";
 import ProtectRoute from './ProtectRoute';
 
 
@@ -16,7 +17,8 @@ const DefaultLayoutRoute = () => {
         <Routes>
             <Route element={<DefaultLayout />}>
                 {/* Jira Home Page */}
-                <Route index element={<div>Jira Page Home</div>} />
+                {/* <Route index element={<div>Jira Page Home</div>} /> */}
+                <Route index element={<UnderDevelopment />} />
 
                 {/*----------------------------- Protect Route -----------------------------------------*/}
                 <Route element={<ProtectRoute><Outlet /></ProtectRoute>}>
@@ -33,6 +35,7 @@ const DefaultLayoutRoute = () => {
 
                     <Route path="*" element={<Page404 />} />
                 </Route>
+
             </Route>
         </Routes>
     )
