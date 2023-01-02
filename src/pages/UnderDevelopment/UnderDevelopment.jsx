@@ -12,7 +12,7 @@ const UnderDevelopment = () => {
                 <p>Our Page is under construction</p>
             </div>
             <div className={styles.timer}>
-                <Grid container spacing={{ xs: 1, md: 4 }}>
+                <Grid container spacing={{ xs: 1, sm: 2, md: 4 }}>
                     <Grid xs={3}>
                         <div className={styles.card}>
                             <p>{days}</p>
