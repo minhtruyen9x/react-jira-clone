@@ -19,13 +19,15 @@ import AddIcon from '@mui/icons-material/Add';
 
 
 import { DragDropContext } from 'react-beautiful-dnd'
-
-
 import classnames from 'classnames/bind'
+
+
+import CustomErrorOverLay from '../../components/TableData/CustomErrorOverLay'
 import styles from './KanbanBoard.module.scss'
 import TaskList from './TaskList'
 import TaskDetailModal from './TaskDetailModal'
 import TaskNewModal from './TaskNewModal'
+import SkeletonBoard from './SkeletonBoard'
 import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
 const cx = classnames.bind(styles)
@@ -226,18 +228,24 @@ const KanbanBoard = () => {
             </div>
             <DragDropContext onDragEnd={handleDropEnd}>
                 <div className={cx('content')}>
-                    {getStatus.data?.map(status => (
-                        <div key={status.statusId} className={cx("statusColumn")}>
-                            <h3>{status.statusName}</h3>
-                            <div className={cx('tasksContainer')}>
-                                <TaskList taskList={selectedProject?.lstTask[status.statusId]} taskNewModalRef={TaskNewModalRef} />
-                                <div className={cx('createTaskBtn')} onClick={handleToggleModal}>
-                                    <AddIcon className={cx('addIcon')} />
-                                    <span>Create issue</span>
+                    {getStatus.loading ?
+                        <SkeletonBoard /> :
+                        getStatus.data?.map(status => (
+                            <div key={status.statusId} className={cx("statusColumn")}>
+                                <h3>{status.statusName}</h3>
+                                <div className={cx('tasksContainer')}>
+                                    <TaskList taskList={selectedProject?.lstTask[status.statusId]} taskNewModalRef={TaskNewModalRef} />
+                                    <div className={cx('createTaskBtn')} onClick={handleToggleModal}>
+                                        <AddIcon className={cx('addIcon')} />
+                                        <span>Create issue</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))
+                    }
+                    {getStatus.error ? <CustomErrorOverLay /> : null}
+                    {/* <SkeletonBoard /> */}
+                    {/* <CustomErrorOverLay /> */}
                 </div>
             </DragDropContext>
             <TaskDetailModal />

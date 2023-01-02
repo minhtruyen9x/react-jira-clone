@@ -136,6 +136,7 @@ const ProjectList = () => {
             field: "projectName",
             headerName: "Name",
             flex: 3,
+            cellClassName: cx('projectName'),
             minWidth: 200
         },
         {
@@ -268,6 +269,11 @@ const ProjectList = () => {
                         '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': { py: '4px' },
                     }}
                     loading={loading}
+                    onCellClick={(params, event) => {
+                        console.log(params, event)
+                        if (params.field !== 'projectName') return
+                        navigate(`/jira/projects/${params.id}/kanban-board`)
+                    }}
                     error={error ? error : null}
                 />
             </div>
